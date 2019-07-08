@@ -32,7 +32,8 @@ def help(bot, update):
                             '/orari - invia gli orari\n'
                             '/timeline - invia le timeline\n'
                             '/inviti - invia gli inviti ai principali gruppi\n'
-                            '/help - mostra i comandi disponibili')
+                            '/help - mostra i comandi disponibili\n'
+                            '/test')
 
 def error(bot, update, error):
   """Log Errors caused by Updates."""
