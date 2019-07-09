@@ -25,6 +25,8 @@ def start(bot, update):
                               'Comandi disponibili:\n'
                               '/orari - invia gli orari\n'
                               '/timeline - invia le timeline\n'
+                              '/aule - mostra le aule libere\n'
+                              '/timeline2 - mostra la timeline come testo\n'
                               '/inviti - invia gli inviti ai principali gruppi\n'
                               '/help - mostra i comandi disponibili')
 
@@ -34,6 +36,8 @@ def help(bot, update):
     update.message.reply_text('Comandi disponibili:\n'
                               '/orari - invia gli orari\n'
                               '/timeline - invia le timeline\n'
+                              '/aule - mostra le aule libere\n'
+                              '/timeline2 - mostra la timeline come testo\n'
                               '/inviti - invia gli inviti ai principali gruppi\n'
                               '/help - mostra i comandi disponibili')
 
