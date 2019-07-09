@@ -87,6 +87,13 @@ def _reply(bot: Bot, update: Update, text: str, keyboard: InlineKeyboardMarkup =
                      parse_mode='HTML')
 
 
+def _replace(bot: Bot, update: Update, text: str, keyboard: InlineKeyboardMarkup = None):
+    message = update.message or update.callback_query.message
+    chat_id = message.chat.id
+    message_id = message.message_id
+    bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text, reply_markup=keyboard, parse_mode='HTML')
+
+
 def aule(bot: Bot, update: Update, params: List[str] = None):
     if not params:
         keyboard = [
@@ -107,7 +114,7 @@ def aule(bot: Bot, update: Update, params: List[str] = None):
                                                  callback_data="/aule {} {}".format(edificio, ora)))
             keyboard.append(riga)
         keyboard.append([InlineKeyboardButton(text="Adesso", callback_data="/aule {} {}".format(edificio, now))])
-        _reply(bot, update, "Per che ora vuoi controllare se ci sono aule libere?", InlineKeyboardMarkup(keyboard))
+        _replace(bot, update, "Per che ora vuoi controllare se ci sono aule libere?", InlineKeyboardMarkup(keyboard))
     else:
         edificio = params[0]
         when = Time.from_string(params[1])
@@ -139,7 +146,7 @@ def aule(bot: Bot, update: Update, params: List[str] = None):
                 text += "\u2705 {} {}\n".format(aula['nome'], stato)  # aula libera per ora
             else:
                 text += "\u274c {} {}\n".format(aula['nome'], stato)
-        _reply(bot, update, text)
+        _replace(bot, update, text)
 
 
 def timeline2(bot: Bot, update: Update, params: List[str] = None):
@@ -166,7 +173,7 @@ def timeline2(bot: Bot, update: Update, params: List[str] = None):
                 keyboard.append(riga)
             keyboard.append(
                 [InlineKeyboardButton(text="Tutte le aule", callback_data="/timeline2 {} tutte".format(edificio))])
-            _reply(bot, update, "Scegli l'aula", InlineKeyboardMarkup(keyboard))
+            _replace(bot, update, "Scegli l'aula", InlineKeyboardMarkup(keyboard))
         else:
             aula_edificio = " ".join(params[1:])
             text = ""
@@ -180,4 +187,4 @@ def timeline2(bot: Bot, update: Update, params: List[str] = None):
                         text += "\n"
             if not text:
                 text = "Non sono presenti lezioni in {}!".format(aula_edificio)
-            _reply(bot, update, text)
+            _replace(bot, update, text)
