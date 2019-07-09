@@ -2,3 +2,4 @@ beautifulsoup4
 selenium
 pyvirtualdisplay
 python-telegram-bot
+dataclasses
