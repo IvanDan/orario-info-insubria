@@ -118,7 +118,7 @@ def aule(bot: Bot, update: Update, params: List[str] = None):
     else:
         edificio = params[0]
         when = Time.from_string(params[1])
-        _reply(bot, update, "Consulto la timeline...")
+        _replace(bot, update, "Consulto la timeline...")
         if not get_timeline(edificio):
             return _reply(bot, update, "Errore caricamento timeline. Riprova!")
         text = "Aule libere per le {}\n".format(when)
@@ -159,7 +159,7 @@ def timeline2(bot: Bot, update: Update, params: List[str] = None):
         _reply(bot, update, "Scegli l'edificio", InlineKeyboardMarkup(keyboard))
     else:
         edificio = params[0]
-        _reply(bot, update, "Consulto la timeline...")
+        _replace(bot, update, "Consulto la timeline...")
         if not get_timeline(edificio):
             return _reply(bot, update, "Errore caricamento timeline. Riprova!")
         if len(params) == 1:
