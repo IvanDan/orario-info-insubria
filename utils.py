@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# tabspace set on 4 converted in spaces
+
 import datetime as dt
 import logging
 import time
