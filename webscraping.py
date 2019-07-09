@@ -52,7 +52,7 @@ def get_timeline(edificio) -> bool:
     global tries
     global scraper
 
-    scraper = scraper or WebScraper.firefox()
+    scraper = scraper or WebScraper.chrome()
 
     if edificio not in edifici or edifici[edificio]['data'].day != Date.by_now().day:
         logging.info("web scraping per {} con {} secondo/i di attesa".format(edificio, tries))
