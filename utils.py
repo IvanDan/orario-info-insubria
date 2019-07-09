@@ -190,8 +190,8 @@ class WebScraper:
     def chrome(cls):
         options = ChromeOptions()
         options.headless = True
-        display = Display(visible=0, size=(800, 600))
-        display.start()
+        #display = Display(visible=0, size=(800, 600))
+        #display.start()
         driver = webdriver.Chrome(options=options)
 
         return cls(driver)
