@@ -200,8 +200,8 @@ class WebScraper:
     def firefox(cls):
         options = FirefoxOptions()
         options.headless = True
-        display = Display(visible=0, size=(800, 600))
-        display.start()
+        #display = Display(visible=0, size=(800, 600))
+        #display.start()
         driver = webdriver.Firefox(options=options)
 
         return cls(driver)
