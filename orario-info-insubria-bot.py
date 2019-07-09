@@ -18,13 +18,13 @@ logger = logging.getLogger(__name__)
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
-lista_comandi='Comandi disponibili:\n'
-              '/orari - invia gli orari\n'
-              '/aule - mostra le aule libere\n'
-              '/timeline - invia le timeline\n'
-              '/timeline2 - mostra la timeline come testo\n'
-              '/inviti - invia gli inviti ai principali gruppi\n'
-              '/help - mostra i comandi disponibili'
+lista_comandi=('Comandi disponibili:\n'
+               '/orari - invia gli orari\n'
+               '/aule - mostra le aule libere\n'
+               '/timeline - invia le timeline\n'
+               '/timeline2 - mostra la timeline come testo\n'
+               '/inviti - invia gli inviti ai principali gruppi\n'
+               '/help - mostra i comandi disponibili')
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
