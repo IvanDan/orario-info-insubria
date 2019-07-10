@@ -10,6 +10,7 @@ from typing import Union, Any, List, Dict
 import requests
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
+from pytz import timezone
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -36,7 +37,8 @@ class DateTime(dt.datetime):
 
     @classmethod
     def by_now(cls):
-        now = dt.datetime.now()
+        rome = timezone('Europe/Rome')
+        now = dt.datetime.now(rome)
 
         return cls.from_datetime(now)
 

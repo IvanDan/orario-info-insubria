@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # tabspace set on 4 converted in spaces
 
-import locale
 import logging
 from dataclasses import dataclass
 from typing import Dict, List
@@ -15,7 +14,6 @@ tries = 1
 scraper = None
 edifici = {}
 
-locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
 
 
 @dataclass
