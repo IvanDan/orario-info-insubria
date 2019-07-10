@@ -41,7 +41,7 @@ class DateTime(dt.datetime):
     def by_now(cls):
         now = dt.datetime.now(rome)
 
-        return cls.from_datetime(now)
+        return cls.from_datetime(now).add(hours=2)
 
     @classmethod
     def by_now_with(cls, year: int = None, month: int = None, day: int = None, hour: int = None, minute: int = None,
