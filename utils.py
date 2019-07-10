@@ -16,12 +16,14 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.remote.webdriver import WebDriver
 
+rome = timezone('Europe/Rome')
+
 
 class DateTime(dt.datetime):
 
     def __new__(cls, year: int = 1900, month: int = 1, day: int = 1, hour: int = 0, minute: int = 0, second: int = 0,
-                microsecond: int = 0, tzinfo=None, *, fold=0) -> 'DateTime':
-        return super().__new__(cls, year, month, day, hour, minute, second, microsecond)
+                microsecond: int = 0, tzinfo=rome, *, fold=0) -> 'DateTime':
+        return super().__new__(cls, year, month, day, hour, minute, second, microsecond, tzinfo)
 
     @classmethod
     def from_datetime(cls, datetime: dt.datetime) -> Union['DateTime', 'Date', 'Time']:
@@ -37,7 +39,6 @@ class DateTime(dt.datetime):
 
     @classmethod
     def by_now(cls):
-        rome = timezone('Europe/Rome')
         now = dt.datetime.now(rome)
 
         return cls.from_datetime(now)
