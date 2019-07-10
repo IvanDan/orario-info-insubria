@@ -36,9 +36,9 @@ class DateTime(dt.datetime):
 
     @classmethod
     def by_now(cls):
-        now = dt.datetime.utcnow()
+        now = dt.datetime.now()
 
-        return cls.from_datetime(now).add(hours=2)
+        return cls.from_datetime(now)
 
     @classmethod
     def by_now_with(cls, year: int = None, month: int = None, day: int = None, hour: int = None, minute: int = None,
