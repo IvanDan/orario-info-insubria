@@ -10,19 +10,16 @@ from typing import Union, Any, List, Dict
 import requests
 from bs4 import BeautifulSoup
 from pyvirtualdisplay import Display
-from pytz import timezone
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.remote.webdriver import WebDriver
 
-rome = timezone('Europe/Rome')
-
 
 class DateTime(dt.datetime):
 
     def __new__(cls, year: int = 1900, month: int = 1, day: int = 1, hour: int = 0, minute: int = 0, second: int = 0,
-                microsecond: int = 0, tzinfo=rome, *, fold=0) -> 'DateTime':
+                microsecond: int = 0, tzinfo=None, *, fold=0) -> 'DateTime':
         return super().__new__(cls, year, month, day, hour, minute, second, microsecond, tzinfo)
 
     @classmethod
@@ -39,7 +36,7 @@ class DateTime(dt.datetime):
 
     @classmethod
     def by_now(cls):
-        now = dt.datetime.now(rome)
+        now = dt.datetime.utcnow()
 
         return cls.from_datetime(now).add(hours=2)
 
