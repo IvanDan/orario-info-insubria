@@ -1,2 +1,2 @@
-python: python "orario-info-insubria-bot.py"
+telegram-bot: python "orario-info-insubria-bot.py"
 test: python "test.py"
