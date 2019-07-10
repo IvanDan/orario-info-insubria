@@ -15,7 +15,7 @@ tries = 1
 scraper = None
 edifici = {}
 
-locale.setlocale('LC_ALL', 'it_IT.UTF-8')
+locale.setlocale(locale.LC_ALL, 'it_IT.UTF-8')
 
 
 @dataclass
