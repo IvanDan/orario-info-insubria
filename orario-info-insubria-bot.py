@@ -18,17 +18,20 @@ logger = logging.getLogger(__name__)
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
-lista_comandi=('Comandi disponibili:\n'
-               '/orari - invia gli orari\n'
-               '/aule - mostra le aule libere\n'
-               '/timeline - invia le timeline\n'
-               '/timeline2 - mostra la timeline come testo\n'
-               '/inviti - invia gli inviti ai principali gruppi\n'
-               '/help - mostra i comandi disponibili')
+lista_comandi = ('Comandi disponibili:\n'
+                 '/orari - invia gli orari\n'
+                 '/aule - mostra le aule libere\n'
+                 '/timeline - invia le timeline\n'
+                 '/timeline2 - mostra la timeline come testo\n'
+                 '/inviti - invia gli inviti ai principali gruppi\n'
+                 '/help - mostra i comandi disponibili')
+
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Questo bot ti permette di conoscere gli orari del corso di informatica.\n'+lista_comandi)
+    update.message.reply_text(
+        'Questo bot ti permette di conoscere gli orari del corso di informatica.\n'+lista_comandi)
+
 
 def help(bot, update):
     """Send a message when the command /help is issued."""
@@ -54,7 +57,8 @@ def get_orari_keyboard():
 
 
 def timeline(bot, update):
-    update.message.reply_text('Quale padiglione?', reply_markup=get_timeline_keyboard())
+    update.message.reply_text(
+        'Quale padiglione?', reply_markup=get_timeline_keyboard())
 
 
 def get_timeline_keyboard():
@@ -67,13 +71,16 @@ def get_timeline_keyboard():
 
 
 def inviti(bot, update):
-    update.message.reply_text('Quale gruppo?', reply_markup=get_inviti_keyboard())
+    update.message.reply_text(
+        'Quale gruppo?', reply_markup=get_inviti_keyboard())
 
 
 def get_inviti_keyboard():
     keyboard = [
-        [InlineKeyboardButton(text='Informatica Insubria 2017/2018', callback_data='16/17')],
-        [InlineKeyboardButton(text='Informatica Insubria (1°/2° anno)', callback_data='17/18')]
+        [InlineKeyboardButton(
+            text='Informatica Insubria 2017/2018', callback_data='16/17')],
+        [InlineKeyboardButton(
+            text='Informatica Insubria (1°/2° anno)', callback_data='17/18')]
     ]
     return InlineKeyboardMarkup(keyboard)
 
@@ -88,7 +95,7 @@ def get_orari(bot, to, query, message):
     url = "https://unins.prod.up.cineca.it/calendarioPubblico/contesto=DIPARTIMENTO%2520DI%2520SCIENZE%2520TEORICHE%2520E%2520APPLICATE&titolo=F004%2520INFO%2520{}%2520ANNO%2520I%2520SEMESTRE%252017%252F09%252F2018-21%252F12%252F2018&corsi=F004&anniCorso={}&mostraImpegniAnnullati=true&giorniNonVisualizzati=0&coloraPer=docente&lang=it".format(
         *links[query.data])
     bot.edit_message_text(chat_id=query.message.chat.id, message_id=message,
-                          text='<a href="{}">' \
+                          text='<a href="{}">'
                                'Link orari {}</a>'.format(url, query.data), parse_mode='HTML')
     bot.answer_callback_query(callback_query_id=query.id)
 
@@ -100,9 +107,11 @@ def get_timeline(bot, to, query, message):
         'Morselli': 'mrs'
     }
 
-    url = "http://timeline.uninsubria.it/index.php?cid=&m=&view=pc&sede={}".format(links[query.data])
+    url = "http://timeline.uninsubria.it/index.php?cid=&m=&view=pc&sede={}".format(
+        links[query.data])
     bot.edit_message_text(chat_id=query.message.chat.id, message_id=message,
-                          text='<a href="{}">Link timeline {}</a>'.format(url, query.data),
+                          text='<a href="{}">Link timeline {}</a>'.format(
+                              url, query.data),
                           parse_mode='HTML')
     bot.answer_callback_query(callback_query_id=query.id)
 
@@ -115,7 +124,8 @@ def get_inviti(bot, to, query, message):
 
     url = "https://t.me/joinchat/{}".format(links[query.data])
     bot.edit_message_text(chat_id=query.message.chat.id, message_id=message,
-                          text='<a href="{}">Link gruppo anno {}</a>'.format(url, query.data),
+                          text='<a href="{}">Link gruppo anno {}</a>'.format(
+                              url, query.data),
                           parse_mode='HTML')
 
 
@@ -131,11 +141,13 @@ def callback(bot, update):
         timeline2(bot, update, params)
     else:
         if query.data in ('Monte', 'Morselli', 'Seppilli'):
-            get_timeline(bot, query.from_user.id, query, query.message.message_id)
+            get_timeline(bot, query.from_user.id, query,
+                         query.message.message_id)
         elif query.data in ('primo', 'secondo', 'terzo'):
             get_orari(bot, query.from_user.id, query, query.message.message_id)
         elif query.data in ('16/17', '17/18'):
-            get_inviti(bot, query.from_user.id, query, query.message.message_id)
+            get_inviti(bot, query.from_user.id, query,
+                       query.message.message_id)
 
 
 def main():
