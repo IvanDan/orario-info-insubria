@@ -170,7 +170,6 @@ def main():
     dp.add_handler(CommandHandler("orari", orari))
     dp.add_handler(CommandHandler("timeline", timeline))
     dp.add_handler(CommandHandler("inviti", inviti))
-
     dp.add_handler(CommandHandler("aule", aule))
     dp.add_handler(CommandHandler("timeline2", timeline2))
     dp.add_handler(CallbackQueryHandler(callback))
