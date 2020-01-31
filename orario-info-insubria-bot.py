@@ -157,7 +157,6 @@ def main():
     # TOKEN catch from locale var, usable on heroku
     TOKEN = os.environ["TOKEN"]
 
-    # TOKEN = '343204077:AAGk5-IjYTzHzyqaK3iSoKXNyu6j71E3DgM'
     # Create the EventHandler and pass it your bot's token.
     updater = Updater(TOKEN)
 
