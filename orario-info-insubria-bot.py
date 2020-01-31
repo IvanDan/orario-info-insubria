@@ -24,7 +24,7 @@ lista_comandi = ('Comandi disponibili:\n'
                  '/timeline - invia le timeline\n'
                  '/timeline2 - mostra la timeline come testo\n'
                  '/inviti - invia gli inviti ai principali gruppi\n'
-                 '/help - mostra i comandi disponibili\ntest')
+                 '/help - mostra i comandi disponibili')
 
 
 def start(bot, update):
