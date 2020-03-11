@@ -154,13 +154,11 @@ def callback(bot, update):
 
 def main():
     """Start the bot."""
-    # TOKEN catch from the command-line
-    # TOKEN = sys.argv[1]
-    # TOKEN catch from locale var, usable on heroku
-    TOKEN = os.environ["TOKEN"]
+    # token catch from locale var, usable on heroku
+    token = os.environ["TOKEN"]
 
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater(TOKEN)
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
