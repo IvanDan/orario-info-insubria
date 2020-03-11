@@ -1,5 +1,3 @@
-pip
-setuptools
 beautifulsoup4
 selenium
 requests
