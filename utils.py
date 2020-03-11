@@ -9,7 +9,6 @@ from typing import Union, Any, List, Dict
 
 import requests
 from bs4 import BeautifulSoup
-# from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -193,8 +192,6 @@ class WebScraper:
     def chrome(cls):
         options = ChromeOptions()
         options.headless = True
-        #display = Display(visible=0, size=(800, 600))
-        #display.start()
         driver = webdriver.Chrome(options=options)
 
         return cls(driver)
@@ -203,8 +200,6 @@ class WebScraper:
     def firefox(cls):
         options = FirefoxOptions()
         options.headless = True
-        #display = Display(visible=0, size=(800, 600))
-        #display.start()
         driver = webdriver.Firefox(options=options)
 
         return cls(driver)
