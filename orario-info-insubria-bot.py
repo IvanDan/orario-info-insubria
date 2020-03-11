@@ -139,8 +139,6 @@ def callback(bot, update):
         aule(bot, update, params)
     elif command == 'timeline2':
         timeline2(bot, update, params)
-    elif command == 'teams':
-        teams(bot, update, query, params)
     else:
         if query.data in ('Monte', 'Morselli', 'Seppilli'):
             get_timeline(bot, query.from_user.id, query,
@@ -158,7 +156,7 @@ def main():
     token = os.environ["TOKEN"]
 
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater(token, use_context=True)
+    updater = Updater(token)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
