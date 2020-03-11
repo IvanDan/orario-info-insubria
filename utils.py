@@ -9,7 +9,7 @@ from typing import Union, Any, List, Dict
 
 import requests
 from bs4 import BeautifulSoup
-from pyvirtualdisplay import Display
+# from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
