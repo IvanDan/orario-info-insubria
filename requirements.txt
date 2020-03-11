@@ -1,9 +1,6 @@
 pip
 setuptools
-# pytz
 beautifulsoup4
 selenium
-# pyvirtualdisplay
-# dataclasses
 requests
 python-telegram-bot
