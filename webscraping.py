@@ -15,7 +15,6 @@ scraper = None
 edifici = {}
 
 
-
 @dataclass
 class _Lezione:
     start: Time
