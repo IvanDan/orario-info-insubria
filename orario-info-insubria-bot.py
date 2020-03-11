@@ -4,6 +4,7 @@
 import logging
 import os
 
+from typing import Dict, List
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
@@ -14,7 +15,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
@@ -30,7 +30,7 @@ lista_comandi = ('Comandi disponibili:\n'
 def start(bot, update):
     """Send a message when the command /start is issued."""
     update.message.reply_text(
-        'Questo bot ti permette di conoscere gli orari del corso di informatica.\n'+lista_comandi)
+        'Questo bot ti permette di conoscere gli orari del corso di informatica.\n' + lista_comandi)
 
 
 def help(bot, update):
@@ -61,6 +61,11 @@ def timeline(bot, update):
         'Quale padiglione?', reply_markup=get_timeline_keyboard())
 
 
+def inviti(bot, update):
+    update.message.reply_text(
+        'Quale gruppo?', reply_markup=get_inviti_keyboard())
+
+
 def get_timeline_keyboard():
     keyboard = [
         [InlineKeyboardButton(text='Monte Generoso', callback_data='Monte')],
@@ -68,11 +73,6 @@ def get_timeline_keyboard():
         [InlineKeyboardButton(text='Seppilli', callback_data='Seppilli')]
     ]
     return InlineKeyboardMarkup(keyboard)
-
-
-def inviti(bot, update):
-    update.message.reply_text(
-        'Quale gruppo?', reply_markup=get_inviti_keyboard())
 
 
 def get_inviti_keyboard():
@@ -129,6 +129,26 @@ def get_inviti(bot, to, query, message):
                           parse_mode='HTML')
 
 
+def teams(bot, update, params: List[str] = None):
+    if not params:
+        keyboard = [
+            [InlineKeyboardButton(text='Storia degli automi', callback_data='/teams sda')],
+            [InlineKeyboardButton(text='Programmazione procedurale', callback_data='/teams pp')]
+        ]
+        update.message.reply_text('Quale lezione?', InlineKeyboardMarkup(keyboard))
+    elif len(params) == 1:
+        keyboard = []
+        if params[0] == 'sda':
+            keyboard.append(InlineKeyboardButton(text='Lezione di martedì', callback_data='sda_mar'))
+            keyboard.append(InlineKeyboardButton(text='Lezione di venerdì', callback_data='sda_ven'))
+
+
+# def get_teams_link():
+#     links = {
+#         'sda':
+#     }
+
+
 def callback(bot, update):
     query = update.callback_query
 
@@ -139,6 +159,8 @@ def callback(bot, update):
         aule(bot, update, params)
     elif command == 'timeline2':
         timeline2(bot, update, params)
+    elif command == 'teams':
+        teams(bot, update, params)
     else:
         if query.data in ('Monte', 'Morselli', 'Seppilli'):
             get_timeline(bot, query.from_user.id, query,
@@ -148,6 +170,8 @@ def callback(bot, update):
         elif query.data in ('16/17', '17/18'):
             get_inviti(bot, query.from_user.id, query,
                        query.message.message_id)
+        # elif query.data in ('sda', 'pp'):
+        #     get_teams_link(bot, query.from_user.id, query, query.message.message_id)
 
 
 def main():
