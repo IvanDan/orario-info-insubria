@@ -129,18 +129,17 @@ def get_inviti(bot, to, query, message):
                           parse_mode='HTML')
 
 
-def teams(bot, update, params: List[str] = None):
+def teams(bot, update, query, message, params: List[str] = None):
     if not params:
-        keyboard = [
-            [InlineKeyboardButton(text='Storia degli automi', callback_data='/teams sda')],
-            [InlineKeyboardButton(text='Programmazione procedurale', callback_data='/teams pp')]
-        ]
+        keyboard = [InlineKeyboardButton(text='Storia degli automi', callback_data='/teams sda'),
+                    InlineKeyboardButton(text='Programmazione procedurale', callback_data='/teams pp')]
         update.message.reply_text('Quale lezione?', InlineKeyboardMarkup(keyboard))
     elif len(params) == 1:
         keyboard = []
         if params[0] == 'sda':
             keyboard.append(InlineKeyboardButton(text='Lezione di martedì', callback_data='sda_mar'))
             keyboard.append(InlineKeyboardButton(text='Lezione di venerdì', callback_data='sda_ven'))
+            bot.edit_message_text(chat_id=query.message.message_id, message_id=message)
 
 
 # def get_teams_link():
@@ -149,7 +148,7 @@ def teams(bot, update, params: List[str] = None):
 #     }
 
 
-def callback(bot, update):
+def callback(bot, update, message):
     query = update.callback_query
 
     command = query.data.split()[0][1:]
@@ -160,7 +159,7 @@ def callback(bot, update):
     elif command == 'timeline2':
         timeline2(bot, update, params)
     elif command == 'teams':
-        teams(bot, update, params)
+        teams(bot, update, query, message, params)
     else:
         if query.data in ('Monte', 'Morselli', 'Seppilli'):
             get_timeline(bot, query.from_user.id, query,
@@ -170,8 +169,6 @@ def callback(bot, update):
         elif query.data in ('16/17', '17/18'):
             get_inviti(bot, query.from_user.id, query,
                        query.message.message_id)
-        # elif query.data in ('sda', 'pp'):
-        #     get_teams_link(bot, query.from_user.id, query, query.message.message_id)
 
 
 def main():
