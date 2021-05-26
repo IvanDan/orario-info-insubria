@@ -5,8 +5,8 @@ import logging
 import os
 
 from typing import Dict, List
-from telegram import *
-from telegram.ext import *
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 # Enable logging
 from webscraping import aule, timeline2
@@ -27,20 +27,20 @@ lista_comandi = ('Comandi disponibili:\n'
                  '/help - mostra i comandi disponibili')
 
 
-def start(update: Update, context: CallbackContext):
+def start(bot, update):
     """Send a message when the command /start is issued."""
-    context.bot.send_message(
-        text='Questo bot ti permette di conoscere gli orari del corso di informatica.\n' + lista_comandi)
+    update.message.reply_text(
+        'Questo bot ti permette di conoscere gli orari del corso di informatica.\n' + lista_comandi)
 
 
-def help(update: Update, context: CallbackContext):
+def help(bot, update):
     """Send a message when the command /help is issued."""
-    context.bot.send_message(text=lista_comandi, chat_id=context.chat_data)
+    update.message.reply_text(lista_comandi)
 
 
-def error(update, context):
+def error(bot, update, error):
     """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    logger.warning('Update "%s" caused error "%s"', update, error)
 
 
 def orari(bot, update):
@@ -156,7 +156,7 @@ def main():
     token = os.environ["TOKEN"]
 
     # Create the EventHandler and pass it your bot's token.
-    updater = Updater(token, use_context=True)
+    updater = Updater(token)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
